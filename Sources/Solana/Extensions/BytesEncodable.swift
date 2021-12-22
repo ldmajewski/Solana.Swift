@@ -25,9 +25,9 @@ extension Array: BytesEncodable where Element == BytesEncodable {
 }
 
 extension RawRepresentable where RawValue == UInt32 {
-    public var bytes: [UInt8] {rawValue.bytes}
+    var bytes: [UInt8] {rawValue.bytes}
 }
 
 extension RawRepresentable where RawValue == UInt8 {
-    public var bytes: [UInt8] {rawValue.bytes}
+    var bytes: [UInt8] {rawValue.bytes}
 }
