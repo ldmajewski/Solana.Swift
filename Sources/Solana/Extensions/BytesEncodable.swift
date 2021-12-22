@@ -1,6 +1,6 @@
 import Foundation
 
-protocol BytesEncodable {
+public protocol BytesEncodable {
     var bytes: [UInt8] {get}
 }
 
