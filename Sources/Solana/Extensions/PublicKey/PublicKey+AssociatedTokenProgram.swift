@@ -28,16 +28,23 @@ extension PublicKey {
     }
 
     // MARK: - Helpers
-    private static func findProgramAddress(
+    public static func findProgramAddress(
         seeds: [Data],
         programId: Self
     ) -> Result<(Self, UInt8), Error> {
         for nonce in stride(from: UInt8(255), to: 0, by: -1) {
             let seedsWithNonce = seeds + [Data([nonce])]
-            return createProgramAddress(
+            let result = createProgramAddress(
                 seeds: seedsWithNonce,
                 programId: programId
             ).map {($0, nonce) }
+            
+            switch (result) {
+                case .success(_):
+                    return result
+                case .failure(_):
+                    break
+            }
         }
         return .failure(SolanaError.notFoundProgramAddress)
     }
