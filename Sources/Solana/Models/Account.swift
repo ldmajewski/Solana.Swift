@@ -67,6 +67,14 @@ public struct Account: Codable, Hashable {
 
         self.phrase = phrase
     }
+    
+    public func signMessage(message: Data) -> Data? {
+        do {
+            return try NaclSign.sign(message: message, secretKey: self.secretKey)
+        } catch {
+            return nil
+        }
+    }
 }
 
 public extension Account {
